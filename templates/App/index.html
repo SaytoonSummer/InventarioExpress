@@ -1,0 +1,59 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homepage</title>
+</head>
+<body style="margin: 0; font-family: Arial, sans-serif;">
+
+    <div style="position: relative; background: white; height: 100vh;">
+
+        <div style="position: absolute; top: 124px; left: 991px; display: flex; align-items: center;">
+            <a href="{% url 'createproduct' %}" style="background: #C3996E; border-radius: 6px; border: 1px #C3996E solid; width: 168px; height: 34px; display: flex; align-items: center; justify-content: center; text-decoration: none; color: white; font-size: 15px; font-weight: 300; box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);">
+                Agregar Producto
+            </a>
+        </div>
+
+        <div style="position: absolute; width: 190px; height: 193px; left: 1226px; top: 755px; background: #FCD54E; border-radius: 50%; box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);"></div>
+        <div style="position: absolute; width: 933px; height: 793px; left: 265px; top: 155px; background: #ffffff; border: 1px #b98046 solid; overflow: hidden; border-radius: 13px; box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);">
+            <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #b98046; background: #BC7E3F; padding: 0 20px; color: white; font-size: 18px; font-weight: 600; height: 80px;">
+                <div style="width: 20%;">Nombre Producto</div>
+                <div style="width: 20%;">Descripción</div>
+                <div style="width: 15%;">Fecha Creación</div>
+                <div style="width: 10%;">Stock</div>
+                <div style="width: 15%;">Categoría</div>
+                <div style="width: 10%;">Precio</div>
+                <div style="width: 10%;">Acciones</div>
+            </div>
+
+            {% for producto in productos %}
+                <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #b98046; padding: 0 20px; height: 80px;">
+                    <div style="width: 20%;">{{ producto.nombre }}</div>
+                    <div style="width: 20%;">{{ producto.descripcion }}</div>
+                    <div style="width: 15%;">{{ producto.fecha_creacion }}</div>
+                    <div style="width: 10%;">{{ producto.stock_disponible }}</div>
+                    <div style="width: 15%;">{{ producto.categoria }}</div>
+                    <div style="width: 10%;">{{ producto.precio }}</div>
+                    <div style="width: 10%; display: flex; align-items: center; justify-content: space-between;">
+                        <a href="{% url 'updateproduct' producto.id %}" style="text-decoration: none; color: #BC7E3F;">
+                            <button style="width: 45px; height: 25px; border-radius: 6px; border: 1px #BC7E3F solid; background-color: #BC7E3F; color: white; cursor: pointer;">Editar</button>
+                        </a>
+                        <a href="{% url 'deleteproduct' producto.id %}" style="text-decoration: none; color: #BC7E3F;">
+                            <button style="width: 60px; height: 25px; border-radius: 6px; border: 1px #BC7E3F solid; background-color: #BC7E3F; color: white; cursor: pointer;">Eliminar</button>
+                        </a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        
+
+        <img style="width: 202px; height: 168px; position: absolute; left: 1214px; top: 808px;" src="{% static 'img/box.png' %}" />
+
+        <div style="width: 245px; height: 63px; left: 265px; top: 61px; position: absolute; background: #BC7E3F; box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);"></div>
+        <div style="text-align: center; color: white; font-size: 36px; font-weight: 400; line-height: 40px; word-wrap: break-word; width: 239px; position: absolute; left: 265px; top: 71px;">Productos</div>
+    </div>
+
+</body>
+</html>
