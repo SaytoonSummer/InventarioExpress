@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedido</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            display: flex;
+        }
+
+        .navbar {
+            width: 232px;
+            height: 100vh;
+            background: #FF943F;
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25) inset;
+            border-radius: 6px;
+            border: 1px black solid;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .navbar-item {
+            width: 147px;
+            height: 55px;
+            background: #F8F6F2;
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            border: 1px #D1D1D1 solid;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            text-decoration: none;
+            color: black;
+        }
+
+        .navbar-item-create {
+            width: 147px;
+            height: 55px;
+            background: #423e3d;
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            border: 1px #D1D1D1 solid;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            text-decoration: none;
+            color: black;
+        }
+
+        .inventory {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: #615A50;
+            border: 1px black solid;
+            text-align: center;
+            width: calc(100% - 232px);
+            position: relative;
+        }
+
+        .center-box {
+            width: 1000px;
+            height: 900px;
+            background: rgb(255, 246, 234);
+            border: 1px black solid;
+        }
+
+        .inventory img {
+            width: 208px;
+            height: 167px;
+        }
+
+        .create-button {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: #4285f4;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        td a {
+            display: inline-block;
+            padding: 5px 10px;
+            text-decoration: none;
+            background-color: #4285f4;
+            color: white;
+            border-radius: 3px;
+            margin-right: 5px;
+        }
+
+        td a[href*="delete"] {
+            background-color: #ea4335;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="navbar">
+            <a href="{% url 'index' %}" class="navbar-item">Productos</a>
+            <a href="{% url 'indexcliente' %}" class="navbar-item">Clientes</a>
+            <a href="{% url 'indexpedido' %}" class="navbar-item">Pedidos</a>
+            <a href="{% url 'createpedido' %}" style="color: rgb(255, 255, 255);" class="navbar-item-create">Crear Pedido</a>
+            <a href="{% url 'admin:index' %}" style="color: rgb(255, 255, 255);" class="navbar-item-create">Admin</a>
+        </div>
+        <div class="inventory">
+            <div class="center-box">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Cliente</th>
+                            <th>Fecha</th>
+                            <th>Estado</th>
+                            <th>Método de Pago</th>
+                            <th>Dirección de Entrega</th>
+                            <th>Total Pedido</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for pedido in pedidos %}
+                        <tr>
+                            <td>{{ pedido.id }}</td>
+                            <td>{{ pedido.cliente.nombre }}</td>
+                            <td>{{ pedido.fecha }}</td>
+                            <td>{{ pedido.estado }}</td>
+                            <td>{{ pedido.metodo_pago }}</td>
+                            <td>{{ pedido.direccion_entrega }}</td>
+                            <td>{{ pedido.total_pedido }}</td>
+                            <td>
+                                <a href="{% url 'updatepedido' pedido.id %}">Editar</a>
+                                <a href="{% url 'deletepedido' pedido.id %}">Eliminar</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

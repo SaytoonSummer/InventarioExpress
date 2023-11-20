@@ -5,8 +5,66 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Homepage</title>
+    <style>
+        .custom-navbar {
+            position: relative;
+            background: #73400C;
+            border-bottom: 1px #73400C solid;
+            padding: 10px; /* Añade un poco de espacio interno al navbar */
+        }
+    
+        .navbar-brand {
+            font-size: 24px;
+            font-weight: bold;
+            color: #73400C;
+            text-decoration: none;
+            margin-right: 20px; /* Ajusta el margen según sea necesario */
+        }
+    
+        .navbar-item {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #C3996E;
+            border-radius: 6px;
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            margin-right: 10px; /* Ajusta el margen entre elementos según sea necesario */
+            line-height: 41px; /* Ajusta la altura del botón */
+            text-align: center;
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.3s ease; /* Añade una transición suave al color de fondo */
+        }
+
+        .navbar-item-admin {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #FCD54E;
+            border-radius: 6px;
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            margin-right: 10px; /* Ajusta el margen entre elementos según sea necesario */
+            line-height: 41px; /* Ajusta la altura del botón */
+            text-align: center;
+            color: #73400C;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.3s ease; /* Añade una transición suave al color de fondo */
+        }
+    
+        .navbar-item:hover {
+            background: #BC7E3F; /* Cambia el color de fondo al pasar el mouse */
+            color: white; /* Cambia el color del texto al pasar el mouse */
+        }
+    </style>
 </head>
 <body style="margin: 0; font-family: Arial, sans-serif;">
+
+    <nav class="navbar custom-navbar">
+        <a class="navbar-item" href="{% url 'index' %}">Productos</a>
+        <a class="navbar-item" href="{% url 'indexcliente' %}">Clientes</a>
+        <a class="navbar-item" href="{% url 'indexpedido' %}">Pedidos</a>
+        <a class="navbar-item-admin" href="{% url 'admin:index' %}">Admin</a>
+    </nav>
 
     <div style="position: relative; background: white; height: 100vh;">
 
