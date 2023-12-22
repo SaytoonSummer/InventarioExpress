@@ -4,6 +4,10 @@ from datetime import date
 from django.forms import modelformset_factory
 
 
+class ProductoCheckboxSelectMultiple(forms.CheckboxSelectMultiple):
+    template_name = 'custom_checkbox_select.html'
+
+
 class PedidoForm(forms.ModelForm):
     ESTADO_CHOICES = [
         ('Pendiente', 'Pendiente'),
@@ -21,9 +25,15 @@ class PedidoForm(forms.ModelForm):
     estado = forms.ChoiceField(choices=ESTADO_CHOICES)
     metodo_pago = forms.ChoiceField(choices=METODO_PAGO_CHOICES)
 
+    productos = forms.ModelMultipleChoiceField(
+        queryset=Producto.objects.all(),
+        widget=ProductoCheckboxSelectMultiple,  # Usa el widget personalizado aquí
+    )
+
     class Meta:
         model = Pedido
-        fields = ['cliente', 'estado', 'metodo_pago', 'direccion_entrega']
+        fields = ['cliente', 'productos', 'estado',
+                  'metodo_pago', 'direccion_entrega']
 
     def clean_fecha(self):
         return date.today()

@@ -9,9 +9,9 @@ class Pedido(models.Model):
     estado = models.CharField(max_length=100)
     metodo_pago = models.CharField(
         max_length=100, default='Tarjeta de crédito')
-    direccion_entrega = models.CharField(
-        max_length=255)
+    direccion_entrega = models.CharField(max_length=255)
     total_pedido = models.DecimalField(max_digits=10, decimal_places=2)
+    productos = models.ManyToManyField(Producto, through='DetallePedido')
 
     def __str__(self):
         return f"Pedido {self.id} - Cliente: {self.cliente.nombre}"
