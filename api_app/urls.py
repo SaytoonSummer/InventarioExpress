@@ -13,6 +13,6 @@ router.register('pedidos', PedidoViewSet, 'pedidos')
 urlpatterns = [
     path('', api_root, name='api-root'),
     path('api/pedidos/crear/', crear_pedido,
-         name='crear-pedido'),  # Agrega esta línea
+         name='crear-pedido'),
     *router.urls,
 ]
